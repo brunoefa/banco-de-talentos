@@ -57,6 +57,13 @@
 			</div>
 		</div>
       	<hr>
-    </div> <!-- /container -->
+	<div class="row">
+		<div class="col-md-12">
+			<a href="curriculo?acao=excluir&id=${curriculo.id}" class="btn btn-danger btn-lg">Excluir Curriculo</a>
+			<a href="#" class="btn btn-info btn-lg">Editar Curriculo</a>
+		</div>
+	</div>
+<hr>
+</div> <!-- /container -->
     
 <jsp:include page="rodape.jsp" />
