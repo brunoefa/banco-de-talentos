@@ -9,15 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.senai.dao.CurriculoDao;
 import br.com.senai.model.Curriculo;
 
 @WebServlet("/curriculo")
 public class CurriculoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Curriculo curriculo;
+	private CurriculoDao dao;
        
     public CurriculoServlet() {
-        super();
+    	dao = new CurriculoDao();
     }
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -56,7 +58,7 @@ public class CurriculoServlet extends HttpServlet {
 	
 	private void salvar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		capturarDados(request, response);
-		// Salvar curriculo no banco de dados
+		dao.salvar(curriculo);
 		request.setAttribute("mensagem", "Curriculo salvo com sucesso!");
 		visualizar(request, response);
 	}
