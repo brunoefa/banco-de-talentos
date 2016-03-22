@@ -44,6 +44,7 @@ public class CurriculoServlet extends HttpServlet {
 	}
 	
 	private void visualizar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		curriculo = dao.buscarPorEmail(curriculo.getEmail());
 		request.setAttribute("curriculo", curriculo);
 		encaminharRequisicao(request, response, "curriculo-view.jsp");
 	}
@@ -71,6 +72,7 @@ public class CurriculoServlet extends HttpServlet {
 	private void capturarDados(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
 		curriculo = new Curriculo();
 		curriculo.setNome(request.getParameter("nome"));
+		curriculo.setEmail(request.getParameter("email"));
 		curriculo.setCidade(request.getParameter("cidade"));
 		curriculo.setEstado(request.getParameter("estado"));
 		curriculo.setResumo(request.getParameter("resumo"));

@@ -9,6 +9,16 @@
       <!-- Example row of columns -->
 		<div class="row">
 			<div class="col-md-12">
+				<h1>Informações Pessoais</h1>
+				<div class="col-md-12">
+					<h2 class="job-title">${curriculo.email}</h2>
+					<h3 class="subtitle">${curriculo.cidade} - ${curriculo.estado}</h3>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-12">
 				<h1>Formação Acadêmica</h1>
 				<div class="col-md-12">
 					<h2 class="job-title">${curriculo.titulo1}</h2>

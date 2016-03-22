@@ -2,8 +2,11 @@ package br.com.senai.model;
 
 public class Curriculo {
 	
+	private Integer id;
+	
 	// Dados pessoais
 	private String nome;
+	private String email;
 	private String cidade;
 	private String estado;
 	private String resumo;
@@ -45,8 +48,20 @@ public class Curriculo {
 	public String getNome() {
 		return nome;
 	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getCidade() {
 		return cidade;
@@ -209,6 +224,5 @@ public class Curriculo {
 	}
 	public void setSaida3(String saida3) {
 		this.saida3 = saida3;
-	}
-	
+	}	
 }

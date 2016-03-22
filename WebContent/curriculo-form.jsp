@@ -12,9 +12,13 @@
 			<div class="row">
 				<div class="col-md-12">
 					<h2>Informações Básicas</h2>
-					<div class="form-group col-md-12" >
+					<div class="form-group col-md-6" >
 						<label for="nome">Nome completo</label>
 						<input type="text" name="nome" class="form-control" id="nome" placeholder="Nome">
+					</div>
+					<div class="form-group col-md-6" >
+						<label for="nome">E-mail</label>
+						<input type="text" name="email" class="form-control" id="nome" placeholder="E-mail">
 					</div>
 				</div>
 				<div class="col-md-12">

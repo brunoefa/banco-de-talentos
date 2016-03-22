@@ -1,6 +1,7 @@
 CREATE TABLE `bancodetalentos`.`curriculo` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
   `cidade` VARCHAR(100) NOT NULL,
   `estado` VARCHAR(45) NOT NULL,
   `resumo` TEXT NOT NULL,
@@ -28,4 +29,5 @@ CREATE TABLE `bancodetalentos`.`curriculo` (
   `descricao3` TEXT NOT NULL,
   `entrada3` VARCHAR(4) NOT NULL,
   `saida3` VARCHAR(4) NOT NULL,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC),
   PRIMARY KEY (`id`));
