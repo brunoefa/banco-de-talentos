@@ -28,6 +28,8 @@ public class CurriculoServlet extends HttpServlet {
 		
 		if ("salvar".equals(acao)) {
 			salvar(request, response);
+		} if ("atualizar".equals(acao)) {
+			atualizar(request, response);
 		} else if ("visualizar".equals(acao)) {
 			visualizar(request, response);
 		} else if ("editar".equals(acao)) {
@@ -40,27 +42,47 @@ public class CurriculoServlet extends HttpServlet {
 	}
 	
 	private void cadastrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("acao", "salvar");
 		encaminharRequisicao(request, response, "curriculo-form.jsp");
 	}
 	
 	private void visualizar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		curriculo = dao.buscarPorEmail(curriculo.getEmail());
+		String email = request.getParameter("email");
+		if (email != null) {
+			curriculo = dao.buscarPorEmail(email);
+		} else {
+			curriculo = dao.buscarPorEmail(curriculo.getEmail());
+		}
 		request.setAttribute("curriculo", curriculo);
 		encaminharRequisicao(request, response, "curriculo-view.jsp");
 	}
 	
 	private void editar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		String id = request.getParameter("id");
+		curriculo = dao.buscarPorId(id);
+		request.setAttribute("curriculo", curriculo);
+		request.setAttribute("acao", "atualizar");
+		encaminharRequisicao(request, response, "curriculo-form.jsp");
 	}
 	
 	private void excluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		String id = request.getParameter("id");
+		dao.excluir(id);
+		request.setAttribute("mensagem", "Curriculo excluído com sucesso.");
+		cadastrar(request, response);
 	}
 	
 	private void salvar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		capturarDados(request, response);
 		dao.salvar(curriculo);
 		request.setAttribute("mensagem", "Curriculo salvo com sucesso!");
+		visualizar(request, response);
+	}
+	
+	private void atualizar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		capturarDados(request, response);
+		dao.atualizar(curriculo);
+		request.setAttribute("mensagem", "Curriculo atualizado com sucesso!");
 		visualizar(request, response);
 	}
 	
@@ -71,6 +93,12 @@ public class CurriculoServlet extends HttpServlet {
 	
 	private void capturarDados(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
 		curriculo = new Curriculo();
+
+		String sid = request.getParameter("id");
+		if (sid != null) {
+			curriculo.setId(Integer.parseInt(sid));
+		}
+		
 		curriculo.setNome(request.getParameter("nome"));
 		curriculo.setEmail(request.getParameter("email"));
 		curriculo.setCidade(request.getParameter("cidade"));

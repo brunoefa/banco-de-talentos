@@ -32,6 +32,36 @@ public class CurriculoDao {
 		return curriculo;
 	}
 	
+	public Curriculo buscarPorId(String id) {
+		Curriculo curriculo = new Curriculo();
+		String sql = "SELECT * FROM curriculo where id = ?";
+		try {
+			PreparedStatement stm = connection.prepareStatement(sql);
+			stm.setString(1, id);
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				curriculo = preencherCurriculo(rs);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new RuntimeException();
+		}
+		return curriculo;
+	}
+	
+	public void excluir(String id) {
+		String sql = "DELETE FROM curriculo where id = ?";
+		try {
+			PreparedStatement stm = connection.prepareStatement(sql);
+			stm.setString(1, id);
+			stm.execute();
+			stm.close();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new RuntimeException();
+		}
+	}
+	
 	private Curriculo preencherCurriculo(ResultSet rs) throws SQLException {
 		Curriculo c = new Curriculo();
 		c.setId(rs.getInt("id"));
@@ -39,6 +69,7 @@ public class CurriculoDao {
 		c.setEmail(rs.getString("email"));
 		c.setCidade(rs.getString("cidade"));
 		c.setEstado(rs.getString("estado"));
+		c.setResumo(rs.getString("resumo"));
 		
 		c.setTitulo1(rs.getString("titulo1"));
 		c.setInstituicao1(rs.getString("instituicao1"));
@@ -86,42 +117,7 @@ public class CurriculoDao {
 		
 		try {
 			PreparedStatement stm = connection.prepareStatement(sql);
-			stm.setString(1, curriculo.getNome());
-			stm.setString(2, curriculo.getEmail());
-			stm.setString(3, curriculo.getCidade());
-			stm.setString(4, curriculo.getEstado());
-			stm.setString(5, curriculo.getResumo());
-			
-			stm.setString(6, curriculo.getTitulo1());
-			stm.setString(7, curriculo.getInstituicao1());
-			stm.setString(8, curriculo.getConclusao1());
-			
-			stm.setString(9, curriculo.getTitulo2());
-			stm.setString(10, curriculo.getInstituicao2());
-			stm.setString(11, curriculo.getConclusao2());
-			
-			stm.setString(12, curriculo.getTitulo3());
-			stm.setString(13, curriculo.getInstituicao3());
-			stm.setString(14, curriculo.getConclusao3());
-		
-			stm.setString(15, curriculo.getCargo1());
-			stm.setString(16, curriculo.getEmpresa1());
-			stm.setString(17, curriculo.getDescricao1());
-			stm.setString(18, curriculo.getEntrada1());
-			stm.setString(19, curriculo.getSaida1());
-			
-			stm.setString(20, curriculo.getCargo2());
-			stm.setString(21, curriculo.getEmpresa2());
-			stm.setString(22, curriculo.getDescricao2());
-			stm.setString(23, curriculo.getEntrada2());
-			stm.setString(24, curriculo.getSaida2());
-		
-			stm.setString(25, curriculo.getCargo3());
-			stm.setString(26, curriculo.getEmpresa3());
-			stm.setString(27, curriculo.getDescricao3());
-			stm.setString(28, curriculo.getEntrada3());
-			stm.setString(29, curriculo.getSaida3());
-
+			stm = preencherPreparedStatement(stm, curriculo);
 			stm.execute();
 			stm.close();
 			
@@ -129,7 +125,72 @@ public class CurriculoDao {
 			 System.out.println(e.getMessage());
 			 throw new RuntimeException();
 		}
+	}
+	
+	public void atualizar(Curriculo curriculo) {
+		String sql = "UPDATE curriculo set nome = ?, email = ?, cidade = ?, estado = ?, resumo = ?, "
+				+ "titulo1 = ?, instituicao1 = ?, conclusao1 = ?, "
+				+ "titulo2 = ?, instituicao2 = ?, conclusao2 = ?, "
+				+ "titulo3 = ?, instituicao3 = ?, conclusao3 = ?, "
+				+ "cargo1 = ?, empresa1 = ?, descricao1 = ?, entrada1 = ?, saida1 = ?, "
+				+ "cargo2 = ?, empresa2 = ?, descricao2 = ?, entrada2 = ?, saida2 = ?, "
+				+ "cargo3 = ?, empresa3 = ?, descricao3 = ?, entrada3 = ?, saida3 = ? "
+				+ "WHERE id = ?";
 		
+		try {
+			PreparedStatement stm = connection.prepareStatement(sql);
+			stm = preencherPreparedStatement(stm, curriculo);
+			stm.execute();
+			stm.close();
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new RuntimeException();
+		}
+	}
+	
+	private PreparedStatement preencherPreparedStatement(PreparedStatement stm, Curriculo curriculo) throws SQLException {
+		stm.setString(1, curriculo.getNome());
+		stm.setString(2, curriculo.getEmail());
+		stm.setString(3, curriculo.getCidade());
+		stm.setString(4, curriculo.getEstado());
+		stm.setString(5, curriculo.getResumo());
+		
+		stm.setString(6, curriculo.getTitulo1());
+		stm.setString(7, curriculo.getInstituicao1());
+		stm.setString(8, curriculo.getConclusao1());
+		
+		stm.setString(9, curriculo.getTitulo2());
+		stm.setString(10, curriculo.getInstituicao2());
+		stm.setString(11, curriculo.getConclusao2());
+		
+		stm.setString(12, curriculo.getTitulo3());
+		stm.setString(13, curriculo.getInstituicao3());
+		stm.setString(14, curriculo.getConclusao3());
+	
+		stm.setString(15, curriculo.getCargo1());
+		stm.setString(16, curriculo.getEmpresa1());
+		stm.setString(17, curriculo.getDescricao1());
+		stm.setString(18, curriculo.getEntrada1());
+		stm.setString(19, curriculo.getSaida1());
+		
+		stm.setString(20, curriculo.getCargo2());
+		stm.setString(21, curriculo.getEmpresa2());
+		stm.setString(22, curriculo.getDescricao2());
+		stm.setString(23, curriculo.getEntrada2());
+		stm.setString(24, curriculo.getSaida2());
+	
+		stm.setString(25, curriculo.getCargo3());
+		stm.setString(26, curriculo.getEmpresa3());
+		stm.setString(27, curriculo.getDescricao3());
+		stm.setString(28, curriculo.getEntrada3());
+		stm.setString(29, curriculo.getSaida3());
+		
+		if (curriculo.getId() != null) {
+			stm.setInt(30, curriculo.getId());
+		}
+		
+		return stm;
 	}
 }
 
