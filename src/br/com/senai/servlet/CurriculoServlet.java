@@ -23,6 +23,7 @@ public class CurriculoServlet extends HttpServlet {
     }
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Entrou no service");
 		request.setCharacterEncoding("UTF-8");
 		String acao = request.getParameter("acao");
 		

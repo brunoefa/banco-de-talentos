@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <jsp:include page="titulo.jsp" >
 	<jsp:param name="titulo" value="Cadastro de Curriculo"/>
 	<jsp:param name="descricao" value="Não perca tempo, cadastre seu currículo e mostre ao mercado de trabalho seu potencial.<br />Faça parte de um banco talentos de verdade."/>
@@ -39,7 +38,6 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="row">
 				<div class="col-md-12">
 					<h2>Formação Acadêmica</h2>
@@ -85,7 +83,6 @@
 					</div>
 				</div>
 			</div>
-			
 			<div class="row">
 				<div class="col-md-12">
 					<h2>Experiência Profissional</h2>
@@ -170,5 +167,5 @@
 			</div>
 		</form>
       <hr>
-    </div> <!-- /container -->
+    </div>
 <jsp:include page="rodape.jsp" />    
