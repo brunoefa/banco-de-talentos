@@ -20,3 +20,26 @@ body {
 	font-style: italic;
 	color: #AAA;
 }
+
+.alert-hide{
+	display: none;
+}
+
+.navbar-user{
+	float: left;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+    height: 50px;
+    text-align: right;
+    color: #ffffff;
+}
+
+.navbar-logout{
+	color: #9d9d9d;
+}
+
+.navbar-logout :hover{
+	color: #FFF;
+	text-decoration: none;
+}

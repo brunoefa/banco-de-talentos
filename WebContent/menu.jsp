@@ -8,13 +8,15 @@
   </button>
      <a class="navbar-brand">Banco de Talenos</a>
    </div>
+   <span class="navbar-user navbar-right">${sessionScope.usuario.email} <a href="usuario?acao=sair" id="navbar-logout">(sair)</a></span>
    <div id="navbar" class="navbar-collapse collapse">
-     <form class="navbar-form navbar-right" action="" method="post">
+     <form class="navbar-form navbar-right" action="usuario" method="post">
+       <input type="hidden" name="acao" value="logar">
        <div class="form-group">
-         <input type="text" placeholder="Email" class="form-control">
+         <input type="text" name="email" placeholder="Email" class="form-control">
        </div>
        <div class="form-group">
-         <input type="password" placeholder="Senha" class="form-control">
+         <input type="password" name="senha" placeholder="Senha" class="form-control">
        </div>
        <button type="submit" class="btn btn-success">Entrar</button>
      </form></div></div></nav>
