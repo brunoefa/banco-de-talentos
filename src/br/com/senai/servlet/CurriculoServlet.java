@@ -95,7 +95,7 @@ public class CurriculoServlet extends HttpServlet {
 		curriculo = new Curriculo();
 
 		String sid = request.getParameter("id");
-		if (sid != null) {
+		if (!"".equals(sid) && sid != null) {
 			curriculo.setId(Integer.parseInt(sid));
 		}
 		
