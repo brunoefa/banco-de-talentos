@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import br.com.senai.model.Vaga;
 
@@ -13,6 +14,25 @@ public class VagaDao {
 
 	public VagaDao() {
 		this.connection = new ConnectionFactory().getConnection();
+	}
+	
+	public ArrayList<Vaga> buscarTodos() {
+		ArrayList<Vaga> listaVagas = new ArrayList<Vaga>();
+				
+		String sql = "SELECT * FROM vaga";
+		try {
+			PreparedStatement stm = connection.prepareStatement(sql);
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Vaga vaga = new Vaga();
+				vaga = preencherVaga(rs);
+				listaVagas.add(vaga);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new RuntimeException();
+		}
+		return listaVagas;
 	}
 	
 	public Vaga buscarPorEmail(String email) {

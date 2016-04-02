@@ -65,13 +65,8 @@ public class UsuarioServlet extends HttpServlet {
 	}
 
 	private void mostrarLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
-		if (usuario == null) {
-			request.setAttribute("status", "hide");
-			encaminharRequisicao(request, response, "login.jsp");
-		} else {
-			response.sendRedirect("curriculo");
-		}
+		request.setAttribute("status", "hide");
+		encaminharRequisicao(request, response, "login.jsp");
 	}
 	
 	private void encaminharRequisicao(HttpServletRequest request, HttpServletResponse response, String destino) throws ServletException, IOException {

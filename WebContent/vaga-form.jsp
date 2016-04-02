@@ -55,5 +55,5 @@
 			</div>
 		</form>
       <hr>
-    </div>
 <jsp:include page="rodape.jsp" />    
+    </div>

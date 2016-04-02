@@ -43,3 +43,8 @@ body {
 	color: #FFF;
 	text-decoration: none;
 }
+
+.action{
+	float: right;
+    font-size: 18px;
+}

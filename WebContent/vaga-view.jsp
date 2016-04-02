@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="titulo.jsp" >
 	<jsp:param name="titulo" value="${vaga.titulo}"/>
@@ -16,7 +17,6 @@
 				</div>
 			</div>
 		</div>
-		<hr>
 		<div class="row">
 			<div class="col-md-12">
 				<h1>Formação acadêmica</h1>
@@ -27,7 +27,7 @@
 			<div class="col-md-12">
 				<h1>Remuneração</h1>
 				<div class="col-md-12">
-					<h2 class="job-title">R$ ${vaga.remuneracao}</h2>
+					<h2 class="job-title"><fmt:formatNumber value="${vaga.remuneracao}" type="currency" /></h2>
 				</div>
 			</div>
 		</div>

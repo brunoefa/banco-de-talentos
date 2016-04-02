@@ -1,6 +1,7 @@
 package br.com.senai.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,11 +37,19 @@ public class VagaServlet extends HttpServlet {
 			editar(request, response);
 		} else if ("excluir".equals(acao)) {
 			excluir(request, response);
-		} else {
+		} else if ("cadastrar".equals(acao)) {
 			cadastrar(request, response);
+		} else {
+			listar(request, response);
 		}
 	}
 	
+	private void listar(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
+		ArrayList<Vaga> listaVagas = dao.buscarTodos();
+		request.setAttribute("listaVagas", listaVagas);
+		encaminharRequisicao(request, response, "vaga-list.jsp");
+	}
+
 	private void cadastrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("acao", "salvar");
 		encaminharRequisicao(request, response, "vaga-form.jsp");
