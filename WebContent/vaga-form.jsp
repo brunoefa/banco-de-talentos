@@ -50,7 +50,7 @@
 			<div class="row">
 				<div class="col-md-12">
 				<input type="submit" class="btn btn-success btn-lg" value="Salvar vaga">
-				<a href="#" class="btn btn-default btn-lg">Cancelar</a>
+				<a href="vaga" class="btn btn-default btn-lg">Cancelar</a>
 				</div>
 			</div>
 		</form>

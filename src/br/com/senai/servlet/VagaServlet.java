@@ -56,8 +56,11 @@ public class VagaServlet extends HttpServlet {
 	}
 	
 	private void visualizar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
 		String email = request.getParameter("email");
-		if (email != null) {
+		if (id != null) {
+			vaga = dao.buscarPorId(id);
+		} else if (email != null) {
 			vaga = dao.buscarPorEmail(email);
 		} else {
 			vaga = dao.buscarPorEmail(vaga.getEmail());

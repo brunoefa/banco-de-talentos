@@ -36,6 +36,7 @@
 		<div class="col-md-12">
 			<a href="vaga?acao=excluir&id=${vaga.id}" class="btn btn-danger btn-lg">Excluir vaga</a>
 			<a href="vaga?acao=editar&id=${vaga.id}" class="btn btn-info btn-lg">Editar vaga</a>
+			<a href="vaga" class="btn btn-default btn-lg">Listar vagas</a>
 		</div>
 	</div>
 <hr>
