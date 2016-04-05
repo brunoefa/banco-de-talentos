@@ -10,7 +10,11 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-		<a href="vaga?acao=cadastrar" class="btn btn-success btn-lg btn-new"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Cadastrar nova vaga</a>
+		<a href="vaga?acao=cadastrar" class="btn btn-success btn-lg btn-new"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Cadastrar nova vaga</a> 
+		<button class="btn btn-info btn-lg btn-new" id="filter"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Filtrar vagas</button>
+		</div>
+		<div class="col-md-12 filter-box">
+		Filtros aqui
 		</div>
 	</div>
 	<div class="row">

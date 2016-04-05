@@ -162,7 +162,7 @@
 			<div class="row">
 				<div class="col-md-12">
 				<input type="submit" class="btn btn-success btn-lg" value="Salvar currículo">
-				<a href="#" class="btn btn-default btn-lg">Cancelar</a>
+				<a href="curriculo" class="btn btn-default btn-lg">Cancelar</a>
 				</div>
 			</div>
 		</form>

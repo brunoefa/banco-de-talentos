@@ -1,6 +1,7 @@
 package br.com.senai.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,6 +29,8 @@ public class CurriculoServlet extends HttpServlet {
 		
 		if ("salvar".equals(acao)) {
 			salvar(request, response);
+		} else if ("cadastrar".equals(acao)) {
+			cadastrar(request, response);
 		} if ("atualizar".equals(acao)) {
 			atualizar(request, response);
 		} else if ("visualizar".equals(acao)) {
@@ -37,8 +40,14 @@ public class CurriculoServlet extends HttpServlet {
 		} else if ("excluir".equals(acao)) {
 			excluir(request, response);
 		} else {
-			cadastrar(request, response);
+			listar(request, response);
 		}
+	}
+	
+	private void listar(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
+		ArrayList<Curriculo> listaCurriculos = dao.buscarTodos();
+		request.setAttribute("listaCurriculos", listaCurriculos);
+		encaminharRequisicao(request, response, "curriculo-list.jsp");
 	}
 	
 	private void cadastrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,8 +56,11 @@ public class CurriculoServlet extends HttpServlet {
 	}
 	
 	private void visualizar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
 		String email = request.getParameter("email");
-		if (email != null) {
+		if (!"".equals(id) && id != null) {
+			curriculo = dao.buscarPorId(id);
+		} else if (!"".equals(email) && email != null) {
 			curriculo = dao.buscarPorEmail(email);
 		} else {
 			curriculo = dao.buscarPorEmail(curriculo.getEmail());
@@ -69,7 +81,7 @@ public class CurriculoServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		dao.excluir(id);
 		request.setAttribute("mensagem", "Curriculo excluído com sucesso.");
-		cadastrar(request, response);
+		listar(request, response);
 	}
 	
 	private void salvar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import br.com.senai.model.Curriculo;
 
@@ -13,6 +14,24 @@ public class CurriculoDao {
 
 	public CurriculoDao() {
 		this.connection = new ConnectionFactory().getConnection();
+	}
+	
+	public ArrayList<Curriculo> buscarTodos() {
+		ArrayList<Curriculo> listaCurriculos = new ArrayList<Curriculo>();
+		String sql = "SELECT * FROM curriculo";
+		try {
+			PreparedStatement stm = connection.prepareStatement(sql);
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Curriculo curriculo = new Curriculo();
+				curriculo = preencherCurriculo(rs);
+				listaCurriculos.add(curriculo);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new RuntimeException();
+		}
+		return listaCurriculos;
 	}
 	
 	public Curriculo buscarPorEmail(String email) {

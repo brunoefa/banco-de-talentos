@@ -7,6 +7,6 @@ CREATE TABLE `bancodetalentos`.`vaga` (
   `formacao` VARCHAR(100) NOT NULL,
   `cidade` VARCHAR(100) NOT NULL,
   `estado` VARCHAR(100) NOT NULL,
-  `remuneracao` DECIMAL NOT NULL,
+  `remuneracao` DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC));

@@ -61,6 +61,7 @@
 		<div class="col-md-12">
 			<a href="curriculo?acao=excluir&id=${curriculo.id}" class="btn btn-danger btn-lg">Excluir Curriculo</a>
 			<a href="curriculo?acao=editar&id=${curriculo.id}" class="btn btn-info btn-lg">Editar Curriculo</a>
+			<a href="curriculo" class="btn btn-default btn-lg">Listar Curriculos</a>
 		</div>
 	</div>
 <hr>
