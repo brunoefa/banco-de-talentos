@@ -10,7 +10,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand">Banco de Talenos</a>
+			<a class="navbar-brand" href="vaga">Banco de Talenos</a>
 		</div>
 
 		<c:if test="${sessionScope.usuario != null}">

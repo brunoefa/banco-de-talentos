@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.senai.dao.VagaDao;
+import br.com.senai.filter.VagaFilter;
 import br.com.senai.model.Vaga;
 
 @WebServlet("/vaga")
@@ -39,6 +40,8 @@ public class VagaServlet extends HttpServlet {
 			excluir(request, response);
 		} else if ("cadastrar".equals(acao)) {
 			cadastrar(request, response);
+		} else if ("filtrar".equals(acao)) {
+			filtrar(request, response);
 		} else {
 			listar(request, response);
 		}
@@ -46,6 +49,13 @@ public class VagaServlet extends HttpServlet {
 	
 	private void listar(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
 		ArrayList<Vaga> listaVagas = dao.buscarTodos();
+		request.setAttribute("listaVagas", listaVagas);
+		encaminharRequisicao(request, response, "vaga-list.jsp");
+	}
+	
+	private void filtrar(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
+		VagaFilter filtro = capturarFiltros(request, response);
+		ArrayList<Vaga> listaVagas = dao.buscar(filtro);
 		request.setAttribute("listaVagas", listaVagas);
 		encaminharRequisicao(request, response, "vaga-list.jsp");
 	}
@@ -123,5 +133,26 @@ public class VagaServlet extends HttpServlet {
 		if (!"".equals(sremuneracao) && sremuneracao != null) {
 			vaga.setRemuneracao(Double.parseDouble(sremuneracao.replace(",", ".")));
 		}
+	}
+	
+	private VagaFilter capturarFiltros(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
+		VagaFilter filtro = new VagaFilter();
+		
+		filtro.setTitulo(request.getParameter("titulo"));
+		filtro.setEmpresa(request.getParameter("empresa"));
+		filtro.setCidade(request.getParameter("cidade"));
+		filtro.setEstado(request.getParameter("estado"));
+		
+		String srminima = request.getParameter("remuneracao-minima");
+		if (!"".equals(srminima) && srminima != null) {
+			filtro.setRemuneracaoMinima(Double.parseDouble(srminima.replace(",", ".")));
+		}
+		
+		String srmaxima = request.getParameter("remuneracao-maxima");
+		if (!"".equals(srmaxima) && srmaxima != null) {
+			filtro.setRemuneracaoMaxima(Double.parseDouble(srmaxima.replace(",", ".")));
+		}
+		
+		return filtro;
 	}
 }

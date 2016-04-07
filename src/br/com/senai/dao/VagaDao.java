@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import br.com.senai.filter.VagaFilter;
 import br.com.senai.model.Vaga;
 
 public class VagaDao {
@@ -20,6 +21,25 @@ public class VagaDao {
 		ArrayList<Vaga> listaVagas = new ArrayList<Vaga>();
 				
 		String sql = "SELECT * FROM vaga";
+		try {
+			PreparedStatement stm = connection.prepareStatement(sql);
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Vaga vaga = new Vaga();
+				vaga = preencherVaga(rs);
+				listaVagas.add(vaga);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new RuntimeException();
+		}
+		return listaVagas;
+	}
+	
+	public ArrayList<Vaga> buscar(VagaFilter filtro) {
+		ArrayList<Vaga> listaVagas = new ArrayList<Vaga>();
+		
+		String sql = montarQuery(filtro);
 		try {
 			PreparedStatement stm = connection.prepareStatement(sql);
 			ResultSet rs = stm.executeQuery();
@@ -83,6 +103,19 @@ public class VagaDao {
 		}
 	}
 	
+	private String montarQuery(VagaFilter filtro) {
+		String sql = "select * from vaga where id > 0";
+		
+		if (!"".equals(filtro.getTitulo())) sql += " and titulo like '%" + filtro.getTitulo() + "%'";
+		if (!"".equals(filtro.getEmpresa())) sql += " and empresa like '%" + filtro.getEmpresa() + "%'";
+		if (!"".equals(filtro.getCidade())) sql += " and cidade like '%" + filtro.getCidade() + "%'";
+		if (!"".equals(filtro.getEstado())) sql += " and estado like '%" + filtro.getEstado() + "%'";
+		if (filtro.getRemuneracaoMinima() != null) sql += " and remuneracao >= " + filtro.getRemuneracaoMinima();
+		if (filtro.getRemuneracaoMaxima() != null) sql += " and remuneracao <= " + filtro.getRemuneracaoMaxima();
+
+		return sql;
+	}
+	
 	private Vaga preencherVaga(ResultSet rs) throws SQLException {
 		Vaga v = new Vaga();
 
@@ -144,7 +177,6 @@ public class VagaDao {
 		if (vaga.getId() != null) {
 			stm.setInt(9, vaga.getId());
 		}
-		
 		return stm;
 	}
 }

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import br.com.senai.filter.CurriculoFilter;
 import br.com.senai.model.Curriculo;
 
 public class CurriculoDao {
@@ -19,6 +20,24 @@ public class CurriculoDao {
 	public ArrayList<Curriculo> buscarTodos() {
 		ArrayList<Curriculo> listaCurriculos = new ArrayList<Curriculo>();
 		String sql = "SELECT * FROM curriculo";
+		try {
+			PreparedStatement stm = connection.prepareStatement(sql);
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Curriculo curriculo = new Curriculo();
+				curriculo = preencherCurriculo(rs);
+				listaCurriculos.add(curriculo);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new RuntimeException();
+		}
+		return listaCurriculos;
+	}
+	
+	public ArrayList<Curriculo> buscar(CurriculoFilter filtro) {
+		ArrayList<Curriculo> listaCurriculos = new ArrayList<Curriculo>();
+		String sql = montarQuery(filtro);
 		try {
 			PreparedStatement stm = connection.prepareStatement(sql);
 			ResultSet rs = stm.executeQuery();
@@ -166,6 +185,17 @@ public class CurriculoDao {
 			System.out.println(e.getMessage());
 			throw new RuntimeException();
 		}
+	}
+	
+	private String montarQuery(CurriculoFilter filtro) {
+		String sql = "select * from curriculo where id > 0";
+		
+		if (!"".equals(filtro.getNome())) sql += " and nome like '%" + filtro.getNome() + "%'";
+		if (!"".equals(filtro.getEmail())) sql += " and email like '%" + filtro.getEmail() + "%'";
+		if (!"".equals(filtro.getCidade())) sql += " and cidade like '%" + filtro.getCidade() + "%'";
+		if (!"".equals(filtro.getEstado())) sql += " and estado like '%" + filtro.getEstado() + "%'";
+
+		return sql;
 	}
 	
 	private PreparedStatement preencherPreparedStatement(PreparedStatement stm, Curriculo curriculo) throws SQLException {

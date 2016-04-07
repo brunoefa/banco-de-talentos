@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.senai.dao.CurriculoDao;
+import br.com.senai.filter.CurriculoFilter;
+import br.com.senai.filter.VagaFilter;
 import br.com.senai.model.Curriculo;
+import br.com.senai.model.Vaga;
 
 @WebServlet("/curriculo")
 public class CurriculoServlet extends HttpServlet {
@@ -39,6 +42,8 @@ public class CurriculoServlet extends HttpServlet {
 			editar(request, response);
 		} else if ("excluir".equals(acao)) {
 			excluir(request, response);
+		} else if ("filtrar".equals(acao)) {
+			filtrar(request, response);
 		} else {
 			listar(request, response);
 		}
@@ -46,6 +51,13 @@ public class CurriculoServlet extends HttpServlet {
 	
 	private void listar(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
 		ArrayList<Curriculo> listaCurriculos = dao.buscarTodos();
+		request.setAttribute("listaCurriculos", listaCurriculos);
+		encaminharRequisicao(request, response, "curriculo-list.jsp");
+	}
+	
+	private void filtrar(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
+		CurriculoFilter filtro = capturarFiltros(request, response);
+		ArrayList<Curriculo> listaCurriculos = dao.buscar(filtro);
 		request.setAttribute("listaCurriculos", listaCurriculos);
 		encaminharRequisicao(request, response, "curriculo-list.jsp");
 	}
@@ -101,6 +113,17 @@ public class CurriculoServlet extends HttpServlet {
 	private void encaminharRequisicao(HttpServletRequest request, HttpServletResponse response, String destino) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher(destino);
 		rd.forward(request, response);
+	}
+	
+	private CurriculoFilter capturarFiltros(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
+		CurriculoFilter filtro = new CurriculoFilter();
+		
+		filtro.setNome(request.getParameter("nome"));
+		filtro.setEmail(request.getParameter("email"));
+		filtro.setCidade(request.getParameter("cidade"));
+		filtro.setEstado(request.getParameter("estado"));
+		
+		return filtro;
 	}
 	
 	private void capturarDados(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
