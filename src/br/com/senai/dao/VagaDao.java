@@ -132,19 +132,19 @@ public class VagaDao {
 		return v;
 	}
 
-		public void salvar(Vaga vaga) {
+	public void salvar(Vaga vaga) {
 		String sql = "INSERT INTO vaga (titulo, empresa, email, descricao, formacao, cidade, estado, remuneracao)"
-									 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-		
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
 		try {
 			PreparedStatement stm = connection.prepareStatement(sql);
 			stm = preencherPreparedStatement(stm, vaga);
 			stm.execute();
 			stm.close();
-			
+
 		} catch (SQLException e) {
-			 System.out.println(e.getMessage());
-			 throw new RuntimeException();
+			System.out.println(e.getMessage());
+			throw new RuntimeException();
 		}
 	}
 	

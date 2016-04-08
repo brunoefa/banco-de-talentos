@@ -3,7 +3,7 @@
 
 <jsp:include page="titulo.jsp" >
 	<jsp:param name="titulo" value="Seja bem-vindo"/>
-	<jsp:param name="descricao" value="Não perca tempo, faça seu login cadastre seu currículo.<br />Faça parte de um banco talentos de verdade."/>
+	<jsp:param name="descricao" value="Não perca tempo, faça seu cadastro agora.<br />Faça parte de um banco talentos de verdade."/>
 </jsp:include>
 
     <div class="container">
@@ -24,29 +24,46 @@
 	<c:if test="${sessionScope.usuario == null}">
 		<!-- Example row of columns -->
       	<form action="usuario" method="post" >
-      		<input type="hidden" name="acao" value="logar">
+      		<input type="hidden" name="acao" value="salvar">
+			<div class="row">
+				<div class="form-group col-md-6" >
+					<label for="nome">Nome</label>
+					<input required="required" type="text" name="nome" class="form-control" id="nome" placeholder="informe seu nome">
+				</div>
+			</div>
 			<div class="row">
 				<div class="form-group col-md-6" >
 					<label for="email">E-mail</label>
-					<input type="text" name="email" class="form-control" id="email" placeholder="informe seu e-mail">
+					<input required="required" type="text" name="email" class="form-control" id="email" placeholder="informe seu e-mail">
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-md-6">
-					<label for="senha">Informe sua senha</label>
-					<input type="password" name="senha" class="form-control" id="senha" placeholder="Senha">
+					<label for="senha">Senha</label>
+					<input required="required" type="password" name="senha" class="form-control" id="senha" placeholder="Informe sua senha">
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-12 form-inline">
+					<div class="radio">
+						<label> <input type="radio" name="tipo" value="candidato" checked> Sou um candidato</label>
+					</div>
+					<span>&nbsp;</span>
+					<div class="radio">
+						<label> <input type="radio" name="tipo" value="empresa"> Sou uma empresa </label>
+					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<a href="usuario?acao=cadastrar">Não possui usuário? Cadastre-se!</a><br />
+					<a href="usuario?acao=login" >Já possui usuário, faça login!</a><br />
 				</div>
 			</div>
 			<hr>
 			<div class="row">
 				<div class="col-md-12">
-					<input type="submit" class="btn btn-success btn-lg" value="Entrar">
-					<a href="#" class="btn btn-default btn-lg">Cancelar</a>
+					<input type="submit" class="btn btn-success btn-lg" value="Cadastrar">
+					<a href="curriculo" class="btn btn-default btn-lg">Cancelar</a>
 				</div>
 			</div>
 		</form>

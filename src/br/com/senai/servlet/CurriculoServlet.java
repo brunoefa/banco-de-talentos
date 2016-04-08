@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.senai.dao.CurriculoDao;
 import br.com.senai.filter.CurriculoFilter;
-import br.com.senai.filter.VagaFilter;
 import br.com.senai.model.Curriculo;
-import br.com.senai.model.Vaga;
 
 @WebServlet("/curriculo")
 public class CurriculoServlet extends HttpServlet {
