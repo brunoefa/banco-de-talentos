@@ -112,7 +112,8 @@ public class VagaDao {
 		if (!"".equals(filtro.getEstado())) sql += " and estado like '%" + filtro.getEstado() + "%'";
 		if (filtro.getRemuneracaoMinima() != null) sql += " and remuneracao >= " + filtro.getRemuneracaoMinima();
 		if (filtro.getRemuneracaoMaxima() != null) sql += " and remuneracao <= " + filtro.getRemuneracaoMaxima();
-
+		sql += " order by remuneracao " + filtro.getOrder();
+		
 		return sql;
 	}
 	

@@ -57,3 +57,7 @@ body {
 .filter-box {
 	display: none;
 }
+
+.order{
+	width: 160px;
+}

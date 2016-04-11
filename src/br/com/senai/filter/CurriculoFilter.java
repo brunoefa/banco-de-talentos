@@ -2,6 +2,8 @@ package br.com.senai.filter;
 
 public class CurriculoFilter {
 	
+	private String order;
+	
 	private String nome;
 	private String email;
 	private String cidade;
@@ -31,4 +33,12 @@ public class CurriculoFilter {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+	public String getOrder() {
+		return order;
+	}
+	public void setOrder(String order) {
+		this.order = order;
+	}
+	
+	
 }

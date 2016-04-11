@@ -57,6 +57,7 @@ public class CurriculoServlet extends HttpServlet {
 		CurriculoFilter filtro = capturarFiltros(request, response);
 		ArrayList<Curriculo> listaCurriculos = dao.buscar(filtro);
 		request.setAttribute("listaCurriculos", listaCurriculos);
+		request.setAttribute("filtro", filtro);
 		encaminharRequisicao(request, response, "curriculo-list.jsp");
 	}
 	
@@ -120,6 +121,7 @@ public class CurriculoServlet extends HttpServlet {
 		filtro.setEmail(request.getParameter("email"));
 		filtro.setCidade(request.getParameter("cidade"));
 		filtro.setEstado(request.getParameter("estado"));
+		filtro.setOrder(request.getParameter("order"));
 		
 		return filtro;
 	}

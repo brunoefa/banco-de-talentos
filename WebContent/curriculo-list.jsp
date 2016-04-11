@@ -12,11 +12,19 @@
 		<div class="col-md-12">
 		<a href="curriculo?acao=cadastrar" class="btn btn-success btn-lg btn-new"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Cadastrar novo curriculo</a> 
 		<button class="btn btn-info btn-lg btn-new" id="filter"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Filtrar curriculos</button>
+		<div class="dropdown order">
+			<button class="btn-lg btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> Ordenar por <span class="caret"></span> </button>
+			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				<li><a href="#" class="asc">Nome de A-Z</a></li>
+				<li><a href="#" class="desc">Nome de Z-A</a></li>
+			</ul>
+		</div>
 		</div>
 		<div class="filter-box">
 			<jsp:include page="curriculo-filter.jsp" />		
 		</div>
 	</div>
+	<hr />
 	<div class="row">
 		<div class="col-md-12">
 			<c:forEach items="${listaCurriculos}" var="curriculo">

@@ -194,7 +194,8 @@ public class CurriculoDao {
 		if (!"".equals(filtro.getEmail())) sql += " and email like '%" + filtro.getEmail() + "%'";
 		if (!"".equals(filtro.getCidade())) sql += " and cidade like '%" + filtro.getCidade() + "%'";
 		if (!"".equals(filtro.getEstado())) sql += " and estado like '%" + filtro.getEstado() + "%'";
-
+		sql += " order by nome " + filtro.getOrder();
+		
 		return sql;
 	}
 	

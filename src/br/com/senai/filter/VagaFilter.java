@@ -1,6 +1,7 @@
 package br.com.senai.filter;
 
 public class VagaFilter {
+	private String order;
 	private String titulo;
 	private String cidade;
 	private String estado;
@@ -43,5 +44,11 @@ public class VagaFilter {
 	}
 	public void setRemuneracaoMaxima(Double remuneracaoMaxima) {
 		this.remuneracaoMaxima = remuneracaoMaxima;
+	}
+	public String getOrder() {
+		return order;
+	}
+	public void setOrder(String order) {
+		this.order = order;
 	}
 }

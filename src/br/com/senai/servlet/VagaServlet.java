@@ -57,6 +57,7 @@ public class VagaServlet extends HttpServlet {
 		VagaFilter filtro = capturarFiltros(request, response);
 		ArrayList<Vaga> listaVagas = dao.buscar(filtro);
 		request.setAttribute("listaVagas", listaVagas);
+		request.setAttribute("filtro", filtro);
 		encaminharRequisicao(request, response, "vaga-list.jsp");
 	}
 
@@ -137,6 +138,8 @@ public class VagaServlet extends HttpServlet {
 	
 	private VagaFilter capturarFiltros(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
 		VagaFilter filtro = new VagaFilter();
+		
+		filtro.setOrder(request.getParameter("order"));
 		
 		filtro.setTitulo(request.getParameter("titulo"));
 		filtro.setEmpresa(request.getParameter("empresa"));
