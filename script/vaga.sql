@@ -8,5 +8,6 @@ CREATE TABLE `bancodetalentos`.`vaga` (
   `cidade` VARCHAR(100) NOT NULL,
   `estado` VARCHAR(100) NOT NULL,
   `remuneracao` DECIMAL(10,2) NOT NULL,
+  `like` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC));

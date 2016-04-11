@@ -42,6 +42,8 @@ public class VagaServlet extends HttpServlet {
 			cadastrar(request, response);
 		} else if ("filtrar".equals(acao)) {
 			filtrar(request, response);
+		} else if ("curtir".equals(acao)) {
+			curtir(request, response);
 		} else {
 			listar(request, response);
 		}
@@ -92,7 +94,13 @@ public class VagaServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		dao.excluir(id);
 		request.setAttribute("mensagem", "Vaga excluída com sucesso.");
-		cadastrar(request, response);
+		listar(request, response);
+	}
+	
+	private void curtir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
+		dao.curtir(id);
+		listar(request, response);
 	}
 	
 	private void salvar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -103,6 +103,19 @@ public class VagaDao {
 		}
 	}
 	
+	public void curtir(String id) {
+		String sql = "UPDATE vaga SET vaga.like = vaga.like + 1 where id = ?";
+		try {
+			PreparedStatement stm = connection.prepareStatement(sql);
+			stm.setString(1, id);
+			stm.execute();
+			stm.close();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new RuntimeException();
+		}
+	}
+	
 	private String montarQuery(VagaFilter filtro) {
 		String sql = "select * from vaga where id > 0";
 		
@@ -129,6 +142,7 @@ public class VagaDao {
 		v.setCidade(rs.getString("cidade"));
 		v.setEstado(rs.getString("estado"));
 		v.setRemuneracao(rs.getDouble("remuneracao"));
+		v.setLike(rs.getInt("like"));
 		
 		return v;
 	}

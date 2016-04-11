@@ -13,6 +13,8 @@ public class Vaga {
 		
 	private String email;
 	private Double remuneracao;
+	
+	private Integer like;
 
 	
 	public Integer getId() {
@@ -69,5 +71,11 @@ public class Vaga {
 	}
 	public void setRemuneracao(Double remuneracao) {
 		this.remuneracao = remuneracao;
+	}
+	public Integer getLike() {
+		return like;
+	}
+	public void setLike(Integer like) {
+		this.like = like;
 	}
 }
